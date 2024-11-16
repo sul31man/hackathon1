@@ -1,36 +1,28 @@
 import { useState } from 'react'
 import './App.css'
-
+import AddTaskForm from './components/AddTaskForm'
+import TaskList from './components/TaskList'
 function App() {
   const [tasks, setTasks] = useState([])
 
-  const addTask = (taskText) => {
-    setTasks([...tasks, {
+  const handleAddTask = (formData) => {
+
+    const newTask = {
       id: Date.now(),
-      text: taskText,
-      completed: false
-    }])
+      text: formData.task
+    }
+
+    setTasks([...tasks, newTask])
   }
 
-  const toggleTask = (taskId) => {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? {...task, completed: !task.completed} : task
-    ))
-  }
 
-  const deleteTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId))
-  }
 
   return (
-    <div className="task-manager">
-      <h1>Task Manager</h1>
-      <AddTaskForm onAddTask={addTask} />
-      <TaskList 
-        tasks={tasks}
-        onToggleTask={toggleTask}
-        onDeleteTask={deleteTask}
-      />
+    <div>
+    <h1>Task Manager</h1>
+    <AddTaskForm onAddTask={handleAddTask} />
+    <TaskList tasks={tasks} />
+
     </div>
   )
 }

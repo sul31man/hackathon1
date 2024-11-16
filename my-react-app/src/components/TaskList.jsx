@@ -1,18 +1,13 @@
-import TaskItem from './TaskItem'
-
-function TaskList({ tasks, onToggleTask, onDeleteTask }) {
-  return (
-    <div className="task-list">
-      {tasks.map(task => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onToggle={onToggleTask}
-          onDelete={onDeleteTask}
-        />
-      ))}
-    </div>
-  )
+function TaskList({tasks}) {
+    return (
+        <div>
+            <h2>Task List:</h2>
+            {tasks.map((task) => (
+                <p key={task.id}>{task.text}</p>
+            ))}
+        </div>
+    )
 }
 
 export default TaskList
+
