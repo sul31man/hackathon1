@@ -1,6 +1,6 @@
-function TaskList() {
-    const [tasks, setTasks] = useState([]);
+import { useEffect } from 'react';
 
+function TaskList({ tasks, setTasks }) {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
@@ -13,15 +13,15 @@ function TaskList() {
         };
 
         fetchTasks();
-    }, []);
+    }, []);  // Only fetch on mount
 
     return (
         <div>
-            {tasks.map(task => (
-                <div key={task.id}>{task.title}</div>
+            {tasks.slice(-5).map(task => (
+                <div key={task.id}>{task.task}</div>
             ))}
         </div>
     );
 }
 
-export default TaskList
+export default TaskList;
