@@ -7,6 +7,4 @@ router.register(r'tasks', TaskView, basename='task')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/', include('api-urls')),
-
 ]

@@ -1,12 +1,27 @@
-function TaskList({tasks}) {
+function TaskList() {
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/api/tasks/');
+                const data = await response.json();
+                setTasks(data);
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
+        };
+
+        fetchTasks();
+    }, []);
+
     return (
         <div>
-            <h2>Task List:</h2>
-            {tasks.map((task) => (
-                <p key={task.id}>{task.title}</p>  // Changed from task.text to task.title
+            {tasks.map(task => (
+                <div key={task.id}>{task.title}</div>
             ))}
         </div>
-    )
+    );
 }
 
 export default TaskList
