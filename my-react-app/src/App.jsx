@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Tasks from './pages/Tasks';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 import './App.css';
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -26,7 +28,8 @@ function App() {
             console.error('Error adding task:', error);
         }
     };
-
+    
+    const user = {username: 'testuser'};
  
 
     return (
@@ -35,7 +38,9 @@ function App() {
               <Navbar />
               <div className='content-container'>
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/tasks" element={<Tasks tasks={tasks} setTasks={setTasks} handleAddTask={handleAddTask} />} />
+                <Route path="/profile" element={<Profile user={user} />} />
               </Routes>
               </div>
           </div>
